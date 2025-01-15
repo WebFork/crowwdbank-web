@@ -1,6 +1,6 @@
 import Navbar from "@/components/navbar";
 
-const MainLayout = ({ children }: { children: React.ReactNode }) => {
+const LandingLayout = ({ children }: { children: React.ReactNode }) => {
     return (
         <>
             <Navbar />
@@ -11,4 +11,4 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
     );
 }
 
-export default MainLayout;
+export default LandingLayout;
