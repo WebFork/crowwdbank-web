@@ -5,6 +5,7 @@ import {
 import { getAuth } from "@clerk/nextjs/server";
 import axios from "axios";
 import { NextRequest, NextResponse } from "next/server";
+import { parse } from "path";
 import { v4 } from 'uuid';
 
 const s3 = new S3Client({
@@ -119,7 +120,7 @@ export async function POST(req: NextRequest) {
             valuation: parseFloat(valuation),
             status: "approved",
             minInvestment: 250,
-            maxInvestment: target,
+            maxInvestment: parseFloat(target),
         });
 
         return NextResponse.json(
