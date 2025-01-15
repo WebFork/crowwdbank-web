@@ -8,9 +8,8 @@ import { Card } from "@/components/ui/card";
 import { Upload, ChevronRight } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import axios from "axios";
-import { currentUser } from "@clerk/nextjs/server";
 
-const Onboarding = () => {
+const Onboarding = ({ UserId }: { UserId: string }) => {
     const [step, setStep] = useState(1);
     const [formData, setFormData] = useState({
         panNumber: "",
@@ -79,13 +78,13 @@ const Onboarding = () => {
 
     const handleSubmit = async () => {
         if (validateBankStep()) {
-            const user = await currentUser();
             try {
                 await axios.post(`${process.env.API_URL}/onboarding/user_create`, {
-                    ext_id: user?.id,
+                    ext_id: UserId,
                     pan: formData.panNumber,
                     bank_account: formData.accountNumber,
                     bank_ifsc: formData.ifscCode,
+                    onboarding_complete: true,
                 })
             } catch (e) {
                 console.error(e);

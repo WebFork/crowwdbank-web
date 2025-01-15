@@ -1,6 +1,17 @@
+import { currentUser } from "@clerk/nextjs/server";
 import Onboarding from "./_components/OnboardingPage";
 
 const DashboardPage = async () => {
+    const user = await currentUser();
+
+    if(!user) {
+        return (
+            <div>
+                Loading...
+            </div>
+        );
+    }
+
     try {
         // const response = await axios.get(`${process.env.API_URL}/onboarding/complete`, {
         //     headers: {
@@ -11,7 +22,7 @@ const DashboardPage = async () => {
         // console.log(response.data);
         const onboarding_complete = false;
 
-        if(onboarding_complete) {
+        if (onboarding_complete) {
             return (
                 <div>
                     Dashboard
@@ -19,10 +30,10 @@ const DashboardPage = async () => {
             );
         } else {
             return (
-                <Onboarding />
+                <Onboarding UserId={user.id} />
             );
         }
-    } catch(error) {
+    } catch (error) {
         console.error(error);
     }
 };
