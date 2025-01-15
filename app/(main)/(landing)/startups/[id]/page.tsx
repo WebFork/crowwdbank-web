@@ -1,7 +1,9 @@
 import axios from "axios";
 import StartUpDetails from "./StartUpDetails";
 
-async function StartupDetails({ params }: { params: { id: string } }) {
+
+
+async function StartupDetails({ params }: any) {
     const data = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/fetch/with_id?project_id=${params.id}`)
     const startupData = data.data.project;
     console.log(startupData);
