@@ -1,4 +1,4 @@
-import OnboardingPage from "./_components/OnboardingPage";
+import Onboarding from "./_components/OnboardingPage";
 
 const DashboardPage = async () => {
     try {
@@ -19,7 +19,7 @@ const DashboardPage = async () => {
             );
         } else {
             return (
-                <OnboardingPage />
+                <Onboarding />
             );
         }
     } catch(error) {
