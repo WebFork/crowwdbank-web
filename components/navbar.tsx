@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { Rocket } from "lucide-react"
+import { PiggyBank } from "lucide-react"
 import Link from "next/link"
 import { ModeToggle } from "./mode-toggle"
 
@@ -10,7 +10,7 @@ export default function Navbar() {
         <nav className="border-b">
             <div className="flex h-16 items-center px-4 max-w-7xl mx-auto">
                 <Link href="/" className="flex items-center space-x-2">
-                    <Rocket className="h-6 w-6 text-primary" />
+                    <PiggyBank className="h-6 w-6 text-primary" />
                     <span className="font-bold text-xl">Crowwd Bank</span>
                 </Link>
 

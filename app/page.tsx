@@ -10,7 +10,7 @@ export default function Home() {
       <section className="py-20 px-4">
         <div className="max-w-7xl mx-auto text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            Invest in Tomorrow's
+            Invest in Tomorrow&apos;s
             <span className="text-primary"> Game-Changers</span>
           </h1>
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
@@ -85,7 +85,7 @@ export default function Home() {
                   <div className="flex justify-between items-center">
                     <div>
                       <p className="text-sm text-muted-foreground">Raised</p>
-                      <p className="font-semibold">${(i * 250000).toLocaleString()}</p>
+                      <p className="font-semibold">₹{(i * 250000).toLocaleString()}</p>
                     </div>
                     <Link href={`/startups/${i}`}>
                       <Button>Learn More</Button>
