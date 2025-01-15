@@ -207,7 +207,7 @@ export default function RegisterStartup() {
                             min="0"
                             step="1000"
                             value={formData.valuation}
-                            onChange={(e) => setFormData(prev => ({ ...prev, target: e.target.value }))}
+                            onChange={(e) => setFormData(prev => ({ ...prev, valuation: e.target.value }))}
                             placeholder="Enter valuation amount"
                             required
                         />
