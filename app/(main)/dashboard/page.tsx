@@ -1,5 +1,6 @@
 import { currentUser } from "@clerk/nextjs/server";
 import Onboarding from "./_components/OnboardingPage";
+import axios from "axios";
 
 const DashboardPage = async () => {
     const user = await currentUser();
@@ -13,13 +14,10 @@ const DashboardPage = async () => {
     }
 
     try {
-        // const response = await axios.get(`${process.env.API_URL}/onboarding/complete`, {
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //         "x-api-key": process.env.API_KEY,
-        //     },
-        // });
-        // console.log(response.data);
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/onboarding/complete`, {
+            ext_id: user.id,
+        });
+        console.log(response.data);
         const onboarding_complete = false;
 
         if (onboarding_complete) {
