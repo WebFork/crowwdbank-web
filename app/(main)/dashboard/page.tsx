@@ -1,4 +1,3 @@
-import axios from "axios";
 import OnboardingPage from "./_components/OnboardingPage";
 
 const DashboardPage = async () => {
