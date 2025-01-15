@@ -5,7 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from '@/components/theme-provider';
 import { ClerkProvider } from '@clerk/nextjs';
 import { cn } from '@/lib/utils';
-import { dark, neobrutalism, shadesOfPurple } from '@clerk/themes';
+import { dark } from '@clerk/themes';
 
 const inter = Inter({ subsets: ['latin'] });
 

@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 import { PiggyBank } from "lucide-react"
 import Link from "next/link"
 import { ModeToggle } from "./mode-toggle"
-import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs"
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs"
 
 export default function Navbar() {
     return (
