@@ -3,42 +3,28 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Building2, Search } from "lucide-react";
 import Link from "next/link";
+import axios from "axios";
 
-// Mock startups data - replace with real data fetching
-const startups = [
-    {
-        id: "1",
-        name: "EcoTech Solutions",
-        description: "Innovative solar technology with 40% increased efficiency",
-        category: "Renewable Energy",
-        raised: 2000000,
-        target: 3000000,
-        equity: 15,
-        imageUrl: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-        id: "2",
-        name: "HealthAI",
-        description: "AI-powered healthcare diagnostics platform",
-        category: "Healthcare",
-        raised: 1500000,
-        target: 2000000,
-        equity: 10,
-        imageUrl: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-        id: "3",
-        name: "FinanceFlow",
-        description: "Next-generation decentralized finance platform",
-        category: "Fintech",
-        raised: 3000000,
-        target: 5000000,
-        equity: 8,
-        imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80"
+interface Startup {
+    project_id: string;
+    ext_id: string;
+    name: string;
+    category: string;
+    description: string;
+    logo_url: string;
+    target: string;
+    raised: string;
+    equity: string;
+}
+
+export default async function StartupsList() {
+    const data = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/fetch/projects`);
+    const startups = data.data.projects;
+
+    if (!startups) {
+        return <div>Loading...</div>
     }
-];
 
-export default function StartupsList() {
     return (
         <div className="min-h-screen bg-background">
             <div className="container mx-auto px-4 py-8 space-y-8">
@@ -56,11 +42,11 @@ export default function StartupsList() {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {startups.map((startup) => (
-                        <Link key={startup.id} href={`/startups/${startup.id}`}>
+                    {startups.map((startup: Startup) => (
+                        <Link key={startup.project_id} href={`/startups/${startup.project_id}`}>
                             <Card className="overflow-hidden hover:shadow-lg transition-shadow h-full">
                                 <img
-                                    src={startup.imageUrl}
+                                    src={startup.logo_url}
                                     alt={startup.name}
                                     className="w-full h-48 object-cover"
                                 />
@@ -80,19 +66,21 @@ export default function StartupsList() {
                                             <div
                                                 className="bg-primary rounded-full h-2"
                                                 style={{
-                                                    width: `${(startup.raised / startup.target) * 100}%`,
+                                                    width: `${(parseFloat(startup.raised) / parseFloat(startup.target)) * 100}%`,
                                                 }}
                                             />
                                         </div>
                                         <div className="flex justify-between text-sm">
                                             <span className="text-muted-foreground">Target</span>
-                                            <span className="font-medium">₹{startup.target.toLocaleString()}</span>
+                                            <span className="font-medium">₹{startup.target ? startup.target.toLocaleString() : 500000}</span>
                                         </div>
                                     </div>
 
                                     <div className="flex justify-between items-center pt-2">
                                         <span className="text-sm font-medium">{startup.category}</span>
-                                        <span className="text-sm font-medium text-primary">{startup.equity}% equity</span>
+                                        {startup.equity && (
+                                            <span className="text-sm font-medium text-primary">{startup.equity}% equity</span>
+                                        )}
                                     </div>
                                 </div>
                             </Card>

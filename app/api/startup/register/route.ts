@@ -5,6 +5,7 @@ import {
 import { getAuth } from "@clerk/nextjs/server";
 import axios from "axios";
 import { NextRequest, NextResponse } from "next/server";
+import { v4 } from 'uuid';
 
 const s3 = new S3Client({
     region: 'auto',
@@ -67,6 +68,7 @@ export async function POST(req: NextRequest) {
         const registrationId = formData.get("registrationId") as string;
         const category = formData.get("category") as string;
         const target = formData.get("target") as string;
+        const valuation = formData.get("valuation") as string;
 
         // Validate required fields
         if (!companyName || !description || !address || !tan || !registrationId) {
@@ -103,6 +105,7 @@ export async function POST(req: NextRequest) {
 
         await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/user/register_startup`, {
             ext_id: user.userId,
+            project_id: v4(),
             category,
             name: companyName,
             tan,
@@ -113,6 +116,7 @@ export async function POST(req: NextRequest) {
             incoperate_cert: uploadedFiles.incorporationCertificate,
             pitch_deck: uploadedFiles.pitchDeck,
             target: parseFloat(target),
+            valuation: parseFloat(valuation),
             status: "approved",
         });
 

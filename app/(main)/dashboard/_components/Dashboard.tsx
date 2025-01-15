@@ -6,7 +6,7 @@ import { PlusCircle, TrendingUp, Building2 } from "lucide-react";
 import Link from "next/link";
 import { StartupCard } from "@/components/startup-card";
 
-const Dashboard = () => {
+const Dashboard = ({ startups }: { startups: any }) => {
     return (
         <div className="min-h-screen bg-background">
             <div className="container mx-auto px-4 py-8 space-y-8">
@@ -35,22 +35,17 @@ const Dashboard = () => {
                     <TabsContent value="investments" className="space-y-6">
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             {/* Example investments - replace with real data */}
-                            <StartupCard
-                                id="1"
-                                name="EcoTech Solutions"
-                                description="Sustainable energy solutions for modern businesses"
-                                invested={25000}
-                                equity={2.5}
-                                status="Active"
-                            />
-                            <StartupCard
-                                id="2"
-                                name="HealthAI"
-                                description="AI-powered healthcare diagnostics platform"
-                                invested={15000}
-                                equity={1.5}
-                                status="Active"
-                            />
+                            {startups.map((startup: any) => (
+                                <StartupCard
+                                    key={startup.project_id}
+                                    id={startup.project_id}
+                                    name={startup.name}
+                                    description={startup.description}
+                                    invested={parseFloat(startup.raised)}
+                                    equity={parseFloat(startup.equity) || 0}
+                                    status="Active"
+                                />
+                            ))}
                         </div>
                     </TabsContent>
 

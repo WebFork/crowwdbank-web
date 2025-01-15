@@ -36,6 +36,7 @@ export default function RegisterStartup() {
         registrationId: "",
         category: "",
         target: "",
+        valuation: "",
         logo: null as File | null,
         incorporationCertificate: null as File | null,
         pitchDeck: null as File | null,
@@ -56,7 +57,7 @@ export default function RegisterStartup() {
         // Validate form
         if (!formData.companyName || !formData.description || !formData.address ||
             !formData.tan || !formData.registrationId || !formData.category ||
-            !formData.target) {
+            !formData.target || !formData.valuation) {
             toast({
                 title: "Missing Information",
                 description: "Please fill in all required fields and upload all required files",
@@ -195,6 +196,20 @@ export default function RegisterStartup() {
                             value={formData.target}
                             onChange={(e) => setFormData(prev => ({ ...prev, target: e.target.value }))}
                             placeholder="Enter target amount"
+                            required
+                        />
+                    </div>
+
+                    <div className="space-y-2">
+                        <Label htmlFor="valuation">Company Valuation (₹)</Label>
+                        <Input
+                            id="valuation"
+                            type="number"
+                            min="0"
+                            step="1000"
+                            value={formData.valuation}
+                            onChange={(e) => setFormData(prev => ({ ...prev, target: e.target.value }))}
+                            placeholder="Enter valuation amount"
                             required
                         />
                     </div>

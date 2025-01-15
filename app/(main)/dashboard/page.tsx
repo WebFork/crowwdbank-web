@@ -6,7 +6,10 @@ import axios from "axios";
 const DashboardPage = async () => {
     const user = await currentUser();
 
-    if(!user) {
+    const data = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/fetch/projects`);
+    const startups = data.data.projects;
+
+    if (!user || !startups) {
         return (
             <div>
                 Loading...
@@ -22,7 +25,7 @@ const DashboardPage = async () => {
 
         if (onboarding_complete) {
             return (
-                <Dashboard />
+                <Dashboard startups={startups} />
             );
         } else {
             return (
