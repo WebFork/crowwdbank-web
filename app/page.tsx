@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ArrowRight, Rocket, Shield, Users } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Home() {
@@ -70,10 +71,12 @@ export default function Home() {
           <div className="grid md:grid-cols-3 gap-8">
             {[1, 2, 3].map((i) => (
               <Card key={i} className="overflow-hidden">
-                <img
+                <Image
                   src={`https://images.unsplash.com/photo-${i === 1 ? '1556761175-5973dc0f32e7' : i === 2 ? '1556761175-9c46ee1df122' : '1557804506-669a67965ba0'}?auto=format&fit=crop&w=800&q=80`}
                   alt="Startup"
                   className="w-full h-48 object-cover"
+                  width={800}
+                  height={192}
                 />
                 <div className="p-6">
                   <h3 className="text-xl font-semibold mb-2">
