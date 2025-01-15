@@ -104,9 +104,11 @@ export async function POST(req: NextRequest) {
             uploadedFiles[fileKey] = await uploadToS3(file, fileKey);
         }
 
+        const uuidv4 = v4();
+
         await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/user/register_startup`, {
             ext_id: user.userId,
-            project_id: v4(),
+            project_id: uuidv4,
             category,
             name: companyName,
             tan,
