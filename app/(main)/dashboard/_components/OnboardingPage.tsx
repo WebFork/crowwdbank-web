@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
-import { Upload, ChevronRight, Building } from "lucide-react";
+import { Upload, ChevronRight } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import axios from "axios";
 import { currentUser } from "@clerk/nextjs/server";
@@ -81,7 +81,7 @@ const Onboarding = () => {
         if (validateBankStep()) {
             const user = await currentUser();
             try {
-                const res = await axios.post(`${process.env.API_URL}/onboarding/user_create`, {
+                await axios.post(`${process.env.API_URL}/onboarding/user_create`, {
                     ext_id: user?.id,
                     pan: formData.panNumber,
                     bank_account: formData.accountNumber,
