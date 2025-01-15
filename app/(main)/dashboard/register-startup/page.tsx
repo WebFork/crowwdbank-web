@@ -63,7 +63,6 @@ export default function RegisterStartup() {
                 description: "Please fill in all required fields and upload all required files",
                 variant: "destructive",
             });
-            console.log(formData);
             return;
         }
 

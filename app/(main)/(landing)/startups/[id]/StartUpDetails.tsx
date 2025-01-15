@@ -9,7 +9,8 @@ import { Separator } from "@/components/ui/separator";
 import { MessageCircle, TrendingUp, FileText } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useToast } from "@/hooks/use-toast";
-// import { stripe } from "@/lib/stripe";
+import { useRouter } from "next/navigation";
+import axios from "axios";
 
 function StartUpDetails({ startupData }: { startupData: Startup }) {
     const [investmentAmount, setInvestmentAmount] = useState("");
@@ -18,6 +19,7 @@ function StartUpDetails({ startupData }: { startupData: Startup }) {
         { role: "assistant", content: `Hi! I'm your AI assistant. I can help you learn more about ${startupData.name}. What would you like to know?` }
     ]);
     const { toast } = useToast();
+    const router = useRouter();
 
     const handleInvest = async () => {
         const amount = parseFloat(investmentAmount);
@@ -30,30 +32,24 @@ function StartUpDetails({ startupData }: { startupData: Startup }) {
             return;
         }
 
-        // const session = await stripe.checkout.sessions.create({
-        //     payment_method_types: ["card"],
-        //     mode: 'payment',
-        //     line_items: [{
-        //         price_data: {
-        //             currency: "inr",
-        //             product_data: {
-        //                 name: startupData.name,
-        //                 images: [startupData.logoUrl],
-        //             },
-        //             unit_amount: amount * 100,
-        //         },
-        //         quantity: 1,
-        //     },
-        //     ],
-        //     metadata: {
-
-        //     },
-        // });
-
-        toast({
-            title: "Investment Initiated",
-            description: "You'll be redirected to complete the payment process.",
+        const res = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/stripe/createurl`, {
+            amount,
+            startupData,
         });
+
+        if (res.data.url) {
+            toast({
+                title: "Investment Initiated",
+                description: "You'll be redirected to complete the payment process.",
+            });
+            router.push(res.data.url);
+        } else {
+            toast({
+                title: "Error",
+                description: "Failed to initiate the payment process. Please try again.",
+                variant: "destructive",
+            });
+        }
     };
 
     const handleSendMessage = () => {
