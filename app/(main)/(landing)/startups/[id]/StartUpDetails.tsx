@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -9,12 +9,9 @@ import { Separator } from "@/components/ui/separator";
 import { MessageCircle, TrendingUp, FileText } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useToast } from "@/hooks/use-toast";
-import axios from "axios";
 // import { stripe } from "@/lib/stripe";
 
-function StartUpDetails({ startupData }: { startupData: any }) {
-    console.log(startupData);
-
+function StartUpDetails({ startupData }: { startupData: Startup }) {
     const [investmentAmount, setInvestmentAmount] = useState("");
     const [message, setMessage] = useState("");
     const [chatMessages, setChatMessages] = useState([
@@ -117,7 +114,7 @@ function StartUpDetails({ startupData }: { startupData: any }) {
                             </div>
                         </div>
 
-                        <Button className="w-full" onClick={() => window.open(startupData.pitchDeckUrl)}>
+                        <Button className="w-full" onClick={() => window.open(startupData.pitch_desk)}>
                             <FileText className="mr-2 h-4 w-4" />
                             View Pitch Deck
                         </Button>

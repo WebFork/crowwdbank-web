@@ -6,7 +6,7 @@ import { PlusCircle, TrendingUp, Building2 } from "lucide-react";
 import Link from "next/link";
 import { StartupCard } from "@/components/startup-card";
 
-const Dashboard = ({ startups }: { startups: any }) => {
+const Dashboard = ({ startups }: { startups: Startup[] }) => {
     return (
         <div className="min-h-screen bg-background">
             <div className="container mx-auto px-4 py-8 space-y-8">
@@ -35,7 +35,7 @@ const Dashboard = ({ startups }: { startups: any }) => {
                     <TabsContent value="investments" className="space-y-6">
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             {/* Example investments - replace with real data */}
-                            {startups.map((startup: any) => (
+                            {startups.map((startup: Startup) => (
                                 <StartupCard
                                     key={startup.project_id}
                                     id={startup.project_id}
