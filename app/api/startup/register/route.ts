@@ -124,6 +124,10 @@ export async function POST(req: NextRequest) {
             minInvestment: 250,
             maxInvestment: parseFloat(target),
             raised: 0,
+        }, {
+            headers: {
+                "ngrok-skip-browser-warning": "true",
+            }
         });
 
         return NextResponse.json(

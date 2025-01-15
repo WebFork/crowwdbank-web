@@ -88,6 +88,7 @@ export default function RegisterStartup() {
             submitFormData.append("registrationId", formData.registrationId);
             submitFormData.append("category", formData.category);
             submitFormData.append("target", formData.target);
+            submitFormData.append("valuation", formData.valuation);
 
             // Add files
             if (formData.logo) submitFormData.append("logo", formData.logo);
@@ -104,7 +105,7 @@ export default function RegisterStartup() {
                 title: "Startup Registration Submitted",
                 description: "We'll review your information and get back to you soon.",
             });
-            router.push("/dashboard");
+            // router.push("/dashboard");
         } catch (error) {
             console.error(error);
             toast({
