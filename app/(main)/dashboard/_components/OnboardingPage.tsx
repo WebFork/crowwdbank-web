@@ -8,6 +8,7 @@ import { Card } from "@/components/ui/card";
 import { Upload, ChevronRight } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const Onboarding = ({ UserId }: { UserId: string }) => {
     const [step, setStep] = useState(1);
@@ -18,6 +19,7 @@ const Onboarding = ({ UserId }: { UserId: string }) => {
         ifscCode: "",
     });
     const { toast } = useToast();
+    const router = useRouter();
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
@@ -98,7 +100,7 @@ const Onboarding = ({ UserId }: { UserId: string }) => {
                 title: "Verification Submitted",
                 description: "We'll review your information and get back to you soon.",
             });
-            // Redirect to dashboard or confirmation page
+            router.refresh();
         }
     };
 
