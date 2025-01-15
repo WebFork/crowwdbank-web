@@ -105,7 +105,7 @@ export default function RegisterStartup() {
                 title: "Startup Registration Submitted",
                 description: "We'll review your information and get back to you soon.",
             });
-            // router.push("/dashboard");
+            router.push("/dashboard");
         } catch (error) {
             console.error(error);
             toast({

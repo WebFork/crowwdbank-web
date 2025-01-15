@@ -41,7 +41,7 @@ export async function POST(req: NextRequest) {
                 transaction_id: transactionid,
                 userId: user.userId,
             },
-            success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/transaction/${transactionid}/success`
+            success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/dashboard`,
         });
 
         return NextResponse.json({ url: session.url });

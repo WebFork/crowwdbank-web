@@ -52,19 +52,17 @@ function StartUpDetails({ startupData }: { startupData: Startup }) {
         }
     };
 
-    const handleSendMessage = () => {
+    const handleSendMessage = async () => {
         if (!message.trim()) return;
 
         setChatMessages(prev => [...prev, { role: "user", content: message }]);
         setMessage("");
 
-        // Simulate AI response
-        setTimeout(() => {
+        const res = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/chat/send`, { message, startupData });
             setChatMessages(prev => [...prev, {
                 role: "assistant",
-                content: `I understand you're interested in ${startupData.name}. Their innovative technology has shown remarkable results in pilot projects. Would you like to know more about their technology or business model?`
+                content: `${res.data.message}`
             }]);
-        }, 1000);
     };
 
     if (!startupData) {
