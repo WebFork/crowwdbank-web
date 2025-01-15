@@ -14,10 +14,10 @@ const DashboardPage = async () => {
     }
 
     try {
-        const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/onboarding/complete`, {
-            ext_id: user.id,
-        });
-        console.log(response.data);
+        // const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/onboarding/complete`, {
+        //     ext_id: user.id,
+        // });
+        // console.log(response.data);
         const onboarding_complete = false;
 
         if (onboarding_complete) {

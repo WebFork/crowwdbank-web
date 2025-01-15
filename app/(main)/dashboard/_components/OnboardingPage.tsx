@@ -79,7 +79,7 @@ const Onboarding = ({ UserId }: { UserId: string }) => {
     const handleSubmit = async () => {
         if (validateBankStep()) {
             try {
-                await axios.post(`${process.env.API_URL}/onboarding/user_create`, {
+                await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/onboarding/user_create`, {
                     ext_id: UserId,
                     pan: formData.panNumber,
                     bank_account: formData.accountNumber,
