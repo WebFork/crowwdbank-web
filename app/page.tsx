@@ -1,101 +1,102 @@
-import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { ArrowRight, Rocket, Shield, Users } from "lucide-react";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="flex flex-col min-h-screen">
+      {/* Hero Section */}
+      <section className="py-20 px-4">
+        <div className="max-w-7xl mx-auto text-center">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6">
+            Invest in Tomorrow's
+            <span className="text-primary"> Game-Changers</span>
+          </h1>
+          <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+            Join thousands of investors backing innovative startups.
+            Invest with as little as ₹250 using crypto or traditional payment methods.
+          </p>
+          <div className="flex justify-center gap-4">
+            <Link href="/startups">
+              <Button size="lg" className="text-lg">
+                Browse Startups
+                <ArrowRight className="ml-2" />
+              </Button>
+            </Link>
+            <Link href="/how-it-works">
+              <Button size="lg" variant="outline" className="text-lg">
+                Learn More
+              </Button>
+            </Link>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-20 bg-muted">
+        <div className="max-w-7xl mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-12">Why Choose Crowwd Bank?</h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            <Card className="p-6">
+              <Rocket className="h-12 w-12 text-primary mb-4" />
+              <h3 className="text-xl font-semibold mb-2">Curated Startups</h3>
+              <p className="text-muted-foreground">
+                We carefully vet each startup to ensure quality investment opportunities.
+              </p>
+            </Card>
+            <Card className="p-6">
+              <Shield className="h-12 w-12 text-primary mb-4" />
+              <h3 className="text-xl font-semibold mb-2">Secure Investment</h3>
+              <p className="text-muted-foreground">
+                Industry-leading security measures protect your investments and data.
+              </p>
+            </Card>
+            <Card className="p-6">
+              <Users className="h-12 w-12 text-primary mb-4" />
+              <h3 className="text-xl font-semibold mb-2">Community-Driven</h3>
+              <p className="text-muted-foreground">
+                Join a community of investors and entrepreneurs sharing insights.
+              </p>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Startups Preview */}
+      <section className="py-20 px-4">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl font-bold text-center mb-12">Featured Opportunities</h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            {[1, 2, 3].map((i) => (
+              <Card key={i} className="overflow-hidden">
+                <img
+                  src={`https://images.unsplash.com/photo-${i === 1 ? '1556761175-5973dc0f32e7' : i === 2 ? '1556761175-9c46ee1df122' : '1557804506-669a67965ba0'}?auto=format&fit=crop&w=800&q=80`}
+                  alt="Startup"
+                  className="w-full h-48 object-cover"
+                />
+                <div className="p-6">
+                  <h3 className="text-xl font-semibold mb-2">
+                    {i === 1 ? 'EcoTech Solutions' : i === 2 ? 'HealthAI' : 'FinanceFlow'}
+                  </h3>
+                  <p className="text-muted-foreground mb-4">
+                    {i === 1 ? 'Sustainable energy solutions' : i === 2 ? 'AI-powered healthcare' : 'Decentralized finance platform'}
+                  </p>
+                  <div className="flex justify-between items-center">
+                    <div>
+                      <p className="text-sm text-muted-foreground">Raised</p>
+                      <p className="font-semibold">${(i * 250000).toLocaleString()}</p>
+                    </div>
+                    <Link href={`/startups/${i}`}>
+                      <Button>Learn More</Button>
+                    </Link>
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
