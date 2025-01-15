@@ -121,6 +121,7 @@ export async function POST(req: NextRequest) {
             status: "approved",
             minInvestment: 250,
             maxInvestment: parseFloat(target),
+            raised: 0,
         });
 
         return NextResponse.json(
