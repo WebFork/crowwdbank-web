@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { PiggyBank } from "lucide-react"
 import Link from "next/link"
 import { ModeToggle } from "./mode-toggle"
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs"
 
 export default function Navbar() {
     return (
@@ -21,12 +22,17 @@ export default function Navbar() {
                     <Link href="/how-it-works">
                         <Button variant="ghost">How It Works</Button>
                     </Link>
-                    <Link href="/dashboard">
-                        <Button variant="ghost">Dashboard</Button>
-                    </Link>
-                    <Link href="/auth">
-                        <Button>Get Started</Button>
-                    </Link>
+                    <SignedOut>
+                        <Link href="/dashboard">
+                            <Button>Get Started</Button>
+                        </Link>
+                    </SignedOut>
+                    <SignedIn>
+                        <Link href="/dashboard">
+                            <Button variant="ghost">Dashboard</Button>
+                        </Link>
+                        <UserButton />
+                    </SignedIn>
                     <ModeToggle />
                 </div>
             </div>

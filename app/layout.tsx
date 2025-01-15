@@ -2,8 +2,10 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { Toaster } from "@/components/ui/toaster";
-import Navbar from '@/components/navbar';
 import { ThemeProvider } from '@/components/theme-provider';
+import { ClerkProvider } from '@clerk/nextjs';
+import { cn } from '@/lib/utils';
+import { dark, neobrutalism, shadesOfPurple } from '@clerk/themes';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -18,19 +20,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <Navbar />
-          <main>{children}</main>
-          <Toaster />
-        </ThemeProvider>
-      </body>
-    </html>
+    <
+      ClerkProvider
+      appearance={{
+        baseTheme: [dark],
+      }}
+    >
+      <html lang="en" suppressHydrationWarning>
+        <body className={cn('h-[100vh]', inter.className)}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+            <Toaster />
+          </ThemeProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
