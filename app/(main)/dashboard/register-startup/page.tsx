@@ -10,6 +10,20 @@ import { Upload, Building2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/use-toast";
 import axios from "axios";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+
+const categories = [
+    "Fintech",
+    "Healthcare",
+    "E-commerce",
+    "EdTech",
+    "Enterprise Software",
+    "AI/ML",
+    "Renewable Energy",
+    "Blockchain",
+    "IoT",
+    "Other"
+];
 
 export default function RegisterStartup() {
     const { toast } = useToast();
@@ -20,6 +34,8 @@ export default function RegisterStartup() {
         address: "",
         tan: "",
         registrationId: "",
+        category: "",
+        target: "",
         logo: null as File | null,
         incorporationCertificate: null as File | null,
         pitchDeck: null as File | null,
@@ -39,15 +55,27 @@ export default function RegisterStartup() {
 
         // Validate form
         if (!formData.companyName || !formData.description || !formData.address ||
-            !formData.tan || !formData.registrationId || !formData.logo ||
-            !formData.incorporationCertificate || !formData.pitchDeck) {
+            !formData.tan || !formData.registrationId || !formData.category ||
+            !formData.target) {
             toast({
                 title: "Missing Information",
-                description: "Please fill in all required fields",
+                description: "Please fill in all required fields and upload all required files",
+                variant: "destructive",
+            });
+            console.log(formData);
+            return;
+        }
+
+        const targetAmount = parseFloat(formData.target);
+        if (isNaN(targetAmount) || targetAmount <= 0) {
+            toast({
+                title: "Invalid Target Amount",
+                description: "Please enter a valid target amount",
                 variant: "destructive",
             });
             return;
         }
+
 
         try {
             const submitFormData = new FormData();
@@ -58,6 +86,8 @@ export default function RegisterStartup() {
             submitFormData.append("address", formData.address);
             submitFormData.append("tan", formData.tan);
             submitFormData.append("registrationId", formData.registrationId);
+            submitFormData.append("category", formData.category);
+            submitFormData.append("target", formData.target);
 
             // Add files
             if (formData.logo) submitFormData.append("logo", formData.logo);
@@ -106,6 +136,25 @@ export default function RegisterStartup() {
                         </div>
 
                         <div className="space-y-2">
+                            <Label htmlFor="category">Category</Label>
+                            <Select
+                                value={formData.category}
+                                onValueChange={(value) => setFormData(prev => ({ ...prev, category: value }))}
+                            >
+                                <SelectTrigger>
+                                    <SelectValue placeholder="Select category" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    {categories.map((category) => (
+                                        <SelectItem key={category} value={category}>
+                                            {category}
+                                        </SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
+                        </div>
+
+                        <div className="space-y-2">
                             <Label htmlFor="tan">TAN Number</Label>
                             <Input
                                 id="tan"
@@ -134,6 +183,20 @@ export default function RegisterStartup() {
                                 required
                             />
                         </div>
+                    </div>
+
+                    <div className="space-y-2">
+                        <Label htmlFor="target">Funding Target (₹)</Label>
+                        <Input
+                            id="target"
+                            type="number"
+                            min="0"
+                            step="1000"
+                            value={formData.target}
+                            onChange={(e) => setFormData(prev => ({ ...prev, target: e.target.value }))}
+                            placeholder="Enter target amount"
+                            required
+                        />
                     </div>
 
                     <div className="space-y-2">

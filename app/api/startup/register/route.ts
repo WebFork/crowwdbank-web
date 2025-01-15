@@ -65,6 +65,8 @@ export async function POST(req: NextRequest) {
         const address = formData.get("address") as string;
         const tan = formData.get("tan") as string;
         const registrationId = formData.get("registrationId") as string;
+        const category = formData.get("category") as string;
+        const target = formData.get("target") as string;
 
         // Validate required fields
         if (!companyName || !description || !address || !tan || !registrationId) {
@@ -101,6 +103,7 @@ export async function POST(req: NextRequest) {
 
         await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/user/register_startup`, {
             ext_id: user.userId,
+            category,
             name: companyName,
             tan,
             reg_no: registrationId,
@@ -109,6 +112,7 @@ export async function POST(req: NextRequest) {
             logo_url: uploadedFiles.logo,
             incoperate_cert: uploadedFiles.incorporationCertificate,
             pitch_deck: uploadedFiles.pitchDeck,
+            target: parseFloat(target),
             status: "approved",
         });
 
