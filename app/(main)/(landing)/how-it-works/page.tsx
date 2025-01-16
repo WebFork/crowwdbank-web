@@ -99,7 +99,7 @@ export default function HowItWorks() {
             {/* Features Section */}
             <section className="py-20 px-4 bg-muted">
                 <div className="max-w-7xl mx-auto">
-                    <h2 className="text-3xl font-bold text-center mb-12">Why Choose LaunchVest</h2>
+                    <h2 className="text-3xl font-bold text-center mb-12">Why Choose Crowwd Bank</h2>
                     <div className="grid md:grid-cols-3 gap-8">
                         {features.map((feature, index) => (
                             <Card key={index} className="p-6">

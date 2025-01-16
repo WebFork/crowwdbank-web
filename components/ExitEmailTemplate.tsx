@@ -5,7 +5,7 @@ interface EmailTemplateProps {
     startupName: string;
 }
 
-export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
+export const ExitEmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
     firstName,
     startupName,
 }) => (
@@ -24,7 +24,7 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
         }}>
             <img
                 src="https://example.com/your-logo.png"
-                alt="LaunchVest"
+                alt="Crowwd Bank"
                 style={{
                     height: '32px',
                     marginBottom: '24px',
