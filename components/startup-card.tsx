@@ -2,7 +2,7 @@
 
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Building2, DollarSign } from "lucide-react";
+import { Building2, IndianRupee } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
@@ -14,7 +14,9 @@ interface StartupCardProps {
     equity: number;
     status: string;
     isOwner?: boolean;
+    isInvestor?: boolean;
     onAddProfit?: () => void;
+    onExit?: () => void;
 }
 
 export function StartupCard({
@@ -25,6 +27,8 @@ export function StartupCard({
     equity,
     status,
     isOwner = false,
+    isInvestor = false,
+    onExit,
     onAddProfit,
 }: StartupCardProps) {
     const CardContent = () => (
@@ -41,8 +45,14 @@ export function StartupCard({
                 </div>
                 {isOwner && onAddProfit && (
                     <Button variant="outline" size="sm" onClick={onAddProfit}>
-                        <DollarSign className="h-4 w-4 mr-1" />
-                        Add Profit
+                        <IndianRupee className="h-4 w-4 mr-1" />
+                        Release Funds
+                    </Button>
+                )}
+                {isInvestor && onExit && (
+                    <Button variant="outline" size="sm" onClick={onExit}>
+                        <IndianRupee className="h-4 w-4 mr-1" />
+                        Exit Position
                     </Button>
                 )}
             </div>

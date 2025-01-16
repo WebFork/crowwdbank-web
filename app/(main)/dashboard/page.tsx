@@ -8,8 +8,12 @@ const DashboardPage = async () => {
 
     const data = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/fetch/projects`);
     const data2 = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/fetch/with_user_id?ext_id=${user?.id}`);
+    const data3 = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/fetch/invested_startups?ext_id=${user?.id}`);
     const startups = data.data.projects;
     const myStartups = data2.data.projects;
+    const myInvestedStartups = data3.data.invested_startups;
+
+    console.log(myInvestedStartups);
 
     if (!user || !startups) {
         return (
@@ -27,7 +31,7 @@ const DashboardPage = async () => {
 
         if (onboarding_complete) {
             return (
-                <Dashboard startups={startups} myStartups={myStartups} />
+                <Dashboard startups={startups} myStartups={myStartups} myInvestedStartups={myInvestedStartups} />
             );
         } else {
             return (
