@@ -2,8 +2,9 @@
 
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Building2 } from "lucide-react";
+import { Building2, DollarSign } from "lucide-react";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 interface StartupCardProps {
     id?: string;
@@ -13,6 +14,7 @@ interface StartupCardProps {
     equity: number;
     status: string;
     isOwner?: boolean;
+    onAddProfit?: () => void;
 }
 
 export function StartupCard({
@@ -23,6 +25,7 @@ export function StartupCard({
     equity,
     status,
     isOwner = false,
+    onAddProfit,
 }: StartupCardProps) {
     const CardContent = () => (
         <>
@@ -36,6 +39,12 @@ export function StartupCard({
                         </Badge>
                     </div>
                 </div>
+                {isOwner && onAddProfit && (
+                    <Button variant="outline" size="sm" onClick={onAddProfit}>
+                        <DollarSign className="h-4 w-4 mr-1" />
+                        Add Profit
+                    </Button>
+                )}
             </div>
 
             <p className="text-muted-foreground mb-4 line-clamp-2">{description}</p>
@@ -57,7 +66,7 @@ export function StartupCard({
         </>
     );
 
-    if (id) {
+    if (id && !isOwner) {
         return (
             <Link href={`/startups/${id}`}>
                 <Card className="p-6 hover:shadow-lg transition-shadow cursor-pointer">

@@ -6,8 +6,58 @@ import { PlusCircle, TrendingUp, Building2, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { StartupCard } from "@/components/startup-card";
 import { Card } from "@/components/ui/card";
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
+import axios from "axios";
+import { start } from "repl";
 
 const Dashboard = ({ startups, myStartups }: { startups: Startup[], myStartups: Startup[] }) => {
+    const [activeTab, setActiveTab] = useState("investments");
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const [selectedStartupId, setSelectedStartupId] = useState<string | null>(null);
+    const [netProfit, setNetProfit] = useState("");
+    const { toast } = useToast();
+
+    const handleProfitSubmit = async () => {
+        const profit = parseFloat(netProfit);
+        if (isNaN(profit) || profit < 0) {
+            toast({
+                title: "Invalid Amount",
+                description: "Please enter a valid profit amount",
+                variant: "destructive",
+            });
+            return;
+        }
+
+        await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/mailer`, {
+            profit,
+            startupId: selectedStartupId,
+            // raised: myStartups.find((startup) => startup.project_id === selectedStartupId)?.raised,
+        });
+
+        toast({
+            title: "Profit Distribution Initiated",
+            description: "Investors will be notified of their profit share.",
+        });
+        setIsDialogOpen(false);
+        setNetProfit("");
+        setSelectedStartupId(null);
+    };
+
+    const handleAddProfit = (startupId: string) => {
+        setSelectedStartupId(startupId);
+        setIsDialogOpen(true);
+    };
+
     return (
         <div className="min-h-screen bg-background">
             <div className="container mx-auto px-4 py-8 space-y-8">
@@ -62,6 +112,8 @@ const Dashboard = ({ startups, myStartups }: { startups: Startup[], myStartups: 
                                     invested={parseFloat(startup.raised)}
                                     equity={parseFloat(startup.equity) || 0}
                                     status="Active"
+                                    isOwner
+                                    onAddProfit={() => handleAddProfit(startup.project_id)}
                                 />
                             )) : (
                                 <Card className="p-8 text-center">
@@ -83,6 +135,37 @@ const Dashboard = ({ startups, myStartups }: { startups: Startup[], myStartups: 
                         </div>
                     </TabsContent>
                 </Tabs>
+                <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+                    <DialogContent>
+                        <DialogHeader>
+                            <DialogTitle>Distribute Profits</DialogTitle>
+                            <DialogDescription>
+                                Enter the net profit to distribute among investors based on their equity share.
+                            </DialogDescription>
+                        </DialogHeader>
+                        <div className="space-y-4 py-4">
+                            <div className="space-y-2">
+                                <Label htmlFor="netProfit">Net Profit Amount (₹)</Label>
+                                <Input
+                                    id="netProfit"
+                                    type="number"
+                                    min="0"
+                                    step="1000"
+                                    value={netProfit}
+                                    onChange={(e) => setNetProfit(e.target.value)}
+                                    placeholder="Enter net profit amount"
+                                />
+                            </div>
+                            <Button
+                                className="w-full"
+                                onClick={handleProfitSubmit}
+                                disabled={!netProfit}
+                            >
+                                Distribute Profit
+                            </Button>
+                        </div>
+                    </DialogContent>
+                </Dialog>
             </div>
         </div>
     );
