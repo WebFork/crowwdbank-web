@@ -23,7 +23,7 @@ export const ExitEmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
             boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
         }}>
             <img
-                src="https://example.com/your-logo.png"
+                src="https://cdn.webfork.in/logo.svg"
                 alt="Crowwd Bank"
                 style={{
                     height: '32px',
