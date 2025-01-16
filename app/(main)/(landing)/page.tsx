@@ -1,10 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import axios from "axios";
 import { ArrowRight, Rocket, Shield, Users } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 
-export default function Home() {
+export default async function Home() {
+  const data = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/fetch/projects`);
+  const startups = data.data.projects;
+
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
@@ -69,28 +72,29 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl font-bold text-center mb-12">Featured Opportunities</h2>
           <div className="grid md:grid-cols-3 gap-8">
-            {[1, 2, 3].map((i) => (
-              <Card key={i} className="overflow-hidden">
-                <Image
-                  src={`https://images.unsplash.com/photo-${i === 1 ? '1556761175-5973dc0f32e7' : i === 2 ? '1556761175-9c46ee1df122' : '1557804506-669a67965ba0'}?auto=format&fit=crop&w=800&q=80`}
-                  alt="Startup"
+
+            {startups.slice(0, 3).map((startup: Startup) => (
+              <Card key={startup.project_id} className="overflow-hidden">
+                <img
+                  src={startup.logo_url}
+                  alt={startup.name}
                   className="w-full h-48 object-cover"
-                  width={800}
-                  height={192}
+                // width={800}
+                // height={192}
                 />
                 <div className="p-6">
                   <h3 className="text-xl font-semibold mb-2">
-                    {i === 1 ? 'EcoTech Solutions' : i === 2 ? 'HealthAI' : 'FinanceFlow'}
+                    {startup.name}
                   </h3>
-                  <p className="text-muted-foreground mb-4">
+                  {/* <p className="text-muted-foreground mb-4">
                     {i === 1 ? 'Sustainable energy solutions' : i === 2 ? 'AI-powered healthcare' : 'Decentralized finance platform'}
-                  </p>
+                  </p> */}
                   <div className="flex justify-between items-center">
                     <div>
                       <p className="text-sm text-muted-foreground">Raised</p>
-                      <p className="font-semibold">₹{(i * 250000).toLocaleString()}</p>
+                      <p className="font-semibold">₹{startup.raised.toLocaleString()}</p>
                     </div>
-                    <Link href={`/startups/${i}`}>
+                    <Link href={`/startups/${startup.project_id}`}>
                       <Button>Learn More</Button>
                     </Link>
                   </div>

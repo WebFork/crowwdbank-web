@@ -5,8 +5,8 @@ import {
 import { getAuth } from "@clerk/nextjs/server";
 import axios from "axios";
 import { NextRequest, NextResponse } from "next/server";
-import { parse } from "path";
 import { v4 } from 'uuid';
+import path from 'path'; // Added this and edited line no. 27
 
 const s3 = new S3Client({
     region: 'auto',
@@ -24,7 +24,7 @@ async function uploadToS3(file: File, fileKey: string): Promise<string> {
         const bytes = new Uint8Array(16);
         crypto.getRandomValues(bytes);
         const uniqueId = Array.from(bytes).map(b => b.toString(16).padStart(2, '0')).join('');
-        const fileName = `${fileKey}-${uniqueId}`;
+        const fileName = `${fileKey}-${uniqueId}-${path.extname(file.name)}`;
 
         // Convert file to buffer
         const fileBuffer = Buffer.from(await file.arrayBuffer());
