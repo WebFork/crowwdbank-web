@@ -20,7 +20,7 @@ import { useToast } from "@/hooks/use-toast";
 import axios from "axios";
 
 const Dashboard = ({ startups, myStartups, myInvestedStartups }: { startups: Startup[], myStartups: Startup[], myInvestedStartups: Startup[] }) => {
-    const [activeTab, setActiveTab] = useState("investments");
+    const [activeTab, setActiveTab] = useState("allstartups");
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [isExitDialogOpen, setIsExitDialogOpen] = useState(false);
     const [selectedStartupId, setSelectedStartupId] = useState<string | null>(null);
