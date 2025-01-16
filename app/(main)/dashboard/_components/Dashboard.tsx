@@ -75,7 +75,7 @@ const Dashboard = ({ startups, myStartups }: { startups: Startup[], myStartups: 
                     <TabsList className="w-full sm:w-auto">
                         <TabsTrigger value="investments" className="flex-1 sm:flex-none">
                             <TrendingUp className="mr-2 h-4 w-4" />
-                            My Investments
+                            All Startups
                         </TabsTrigger>
                         <TabsTrigger value="startups" className="flex-1 sm:flex-none">
                             <Building2 className="mr-2 h-4 w-4" />
