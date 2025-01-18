@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CrowwdBank
 
-## Getting Started
+**Seed Funding Simplified: Empowering Common People to Invest in Startups.**
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Overview
+CrowwdBank is a peer-to-peer seed funding platform designed to bridge the gap between local startups and everyday individuals. Our platform enables startup owners to showcase their projects and gain funding from common people, who can invest even small amounts. With AI-driven insights, secure authentication, and a transparent dividend distribution system, CrowwdBank aims to democratize startup investment and foster innovation.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### For Users:
+- **Authentication:** Sign in using Gmail or register for a new account.
+- **Investment Opportunities:** Browse and invest in local startups with small amounts of money.
+- **AI Insights:** Get detailed pros and cons of startups and their ideas through AI-powered analysis.
 
-## Learn More
+### For Startup Owners:
+- **Startup Listing:** Showcase your startup for fundraising.
+- **Document Upload:** Ensure project authenticity by uploading essential documents.
 
-To learn more about Next.js, take a look at the following resources:
+### Platform-wide:
+- **Dividend Distribution:** Transparent distribution of profits to investors.
+- **Funding Distribution:** Efficient allocation of collected funds to startups.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Objectives
+1. Develop a secure authentication system using Gmail for user sign-in and registration.
+2. Create a searchable listing of local startups for fundraising.
+3. Enable startups to upload essential documents to verify their authenticity.
+4. Empower users to invest in startups with small amounts of money.
+5. Integrate AI-driven analysis for insights on startup ideas.
+6. Implement a transparent dividend distribution system based on profits.
+7. Ensure seamless distribution of funds to startups.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Tech Stack
+- **Backend:** Python, FastAPI
+- **Frontend:** React.js, TailwindCSS
+- **Database:** MongoDB
+- **AI Integration:** GPT-based AI for insights
+- **Authentication:** OAuth 2.0 with Gmail
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## Usage
+1. **For Investors:**
+   - Sign in with Gmail.
+   - Browse available startups.
+   - Use the AI assistant for insights and invest in projects.
+
+2. **For Startup Owners:**
+   - Register your startup and upload necessary documents.
+   - Showcase your project to potential investors.
+
+---
